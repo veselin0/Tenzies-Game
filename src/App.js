@@ -4,12 +4,12 @@ import Confetti from "react-confetti";
 function App() {
   
     return (
-        <div>
-            <main>
-                <Confetti 
-                    style={{width: '100%', height: '100%'}}
-                />
+        <div className="container">
+            <div className="container-left"></div>
+            <main className="container-main">
+                
             </main>
+            <div className="container-right"></div>
         </div>
     );
 }
