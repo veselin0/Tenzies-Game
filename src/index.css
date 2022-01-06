@@ -13,4 +13,16 @@ main {
     height: 400px;
     max-width: 800px;
     border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dice-container {
+    display: grid;
+    grid-template: auto auto / repeat(5, 1fr);
+    gap: 20px;
+    /* border: 1px solid yellowgreen; */
 }

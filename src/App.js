@@ -1,16 +1,29 @@
+import {useState} from "react";
 import Confetti from "react-confetti";
 
+import Dice from "./Dice/Dice";
+import "./Dice/Dice.css";
 
 function App() {
-  
+        const allNewDice = () => {
+        const diceArray = [];
+        for (let i = 0; i < 10; i++)
+            diceArray.push(Math.ceil(Math.random() * 6));
+        return diceArray;
+    };
+
+    const [diceNumbers, setDiceNumbers] = useState(allNewDice());
+
+    const diceElements = diceNumbers.map((diceNum, i) => {
+        return (<Dice value={diceNum} key={i}/>);
+    });
+
     return (
-        <div className="container">
-            <div className="container-left"></div>
-            <main className="container-main">
-                
-            </main>
-            <div className="container-right"></div>
-        </div>
+        <main>
+            <div className="dice-container">
+                {diceElements}
+            </div>
+        </main>
     );
 }
 
