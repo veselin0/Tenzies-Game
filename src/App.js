@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {nanoid} from "nanoid";
+import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 
 import Dice from "./Dice/Dice";
@@ -20,11 +20,20 @@ function App() {
     const [diceNums, setDiceNums] = useState(allNewDice);
 
     const diceElements = diceNums.map((diceNum) => (
-        <Dice value={diceNum.value} key={diceNum.id} isHeld={diceNum.isHeld} />
+        <Dice
+            value={diceNum.value}
+            key={diceNum.id}
+            isHeld={diceNum.isHeld}
+            holdDice={() => holdDice(diceNum.id)}
+        />
     ));
 
     const rollDice = () => {
         setDiceNums(allNewDice());
+    };
+
+    const holdDice = (id) => {
+        console.log(id);
     };
 
     return (
