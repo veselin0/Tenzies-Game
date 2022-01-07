@@ -36,11 +36,16 @@ function App() {
     }, [diceNums]);
 
     const rollDice = () => {
-        setDiceNums((oldDice) =>
-            oldDice.map((diceNum) => {
-                return diceNum.isHeld ? diceNum : generateNewDice();
-            })
-        );
+        if (!tenzies) {
+            setDiceNums((oldDice) =>
+                oldDice.map((diceNum) => {
+                    return diceNum.isHeld ? diceNum : generateNewDice();
+                })
+            );
+        } else {
+            setTenzies(false);
+            setDiceNums(allNewDice());
+        }
     };
 
     const diceElements = diceNums.map((diceNum) => (
