@@ -25,7 +25,13 @@ function App() {
     const [tenzies, steTenzies] = useState(false);
 
     useEffect(() => {
-        return console.log("Dice state changed");
+        const allHeld = diceNums.every(diceNum => diceNum.isHeld);
+        const firstValue = diceNums[0].value;
+        const allSameValue = diceNums.every(diceNum => diceNum.value === firstValue);
+        if (allHeld && allSameValue) {
+            steTenzies(true);
+            console.log("You won!");
+        }
     }, [diceNums])
 
     const rollDice = () => {
