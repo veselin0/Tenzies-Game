@@ -33,7 +33,13 @@ function App() {
     };
 
     const holdDice = (id) => {
-        console.log(id);
+        setDiceNums((oldDice) =>
+            oldDice.map((diceNum) => {
+                return diceNum.id === id
+                    ? { ...diceNum, isHeld: !diceNum.isHeld }
+                    : diceNum;
+            })
+        );
     };
 
     return (
