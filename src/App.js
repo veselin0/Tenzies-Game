@@ -22,17 +22,18 @@ function App() {
 
     const [diceNums, setDiceNums] = useState(allNewDice());
 
-    const [tenzies, steTenzies] = useState(false);
+    const [tenzies, setTenzies] = useState(false);
 
     useEffect(() => {
-        const allHeld = diceNums.every(diceNum => diceNum.isHeld);
+        const allHeld = diceNums.every((diceNum) => diceNum.isHeld);
         const firstValue = diceNums[0].value;
-        const allSameValue = diceNums.every(diceNum => diceNum.value === firstValue);
+        const allSameValue = diceNums.every(
+            (diceNum) => diceNum.value === firstValue
+        );
         if (allHeld && allSameValue) {
-            steTenzies(true);
-            console.log("You won!");
+            setTenzies(true);
         }
-    }, [diceNums])
+    }, [diceNums]);
 
     const rollDice = () => {
         setDiceNums((oldDice) =>
@@ -63,6 +64,7 @@ function App() {
 
     return (
         <main>
+            {tenzies && <Confetti />}
             <h1 className="title">Tenzies</h1>
             <p className="instructions">
                 Roll until all dice are the same. Click each die to freeze it at
@@ -70,7 +72,7 @@ function App() {
             </p>
             <div className="dice-container">{diceElements}</div>
             <button className="roll-dice" onClick={rollDice}>
-                Roll
+                {tenzies ? "New Game" : "Roll"}
             </button>
         </main>
     );
