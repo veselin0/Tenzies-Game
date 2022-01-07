@@ -1,28 +1,38 @@
-import {useState} from "react";
+import { useState } from "react";
+import {nanoid} from "nanoid";
 import Confetti from "react-confetti";
 
 import Dice from "./Dice/Dice";
 import "./Dice/Dice.css";
 
 function App() {
-        const allNewDice = () => {
+    const allNewDice = () => {
         const diceArray = [];
         for (let i = 0; i < 10; i++)
-            diceArray.push(Math.ceil(Math.random() * 6));
+            diceArray.push({
+                value: Math.ceil(Math.random() * 6),
+                isHeld: false,
+                id: nanoid(),
+            });
         return diceArray;
     };
 
-    const [diceNumbers, setDiceNumbers] = useState(allNewDice());
+    const [diceNums, setDiceNums] = useState(allNewDice);
 
-    const diceElements = diceNumbers.map((diceNum, i) => {
-        return (<Dice value={diceNum} key={i}/>);
-    });
+    const diceElements = diceNums.map((diceNum) => (
+        <Dice value={diceNum.value} key={diceNum.id} isHeld={diceNum.isHeld} />
+    ));
+
+    const rollDice = () => {
+        setDiceNums(allNewDice());
+    };
 
     return (
         <main>
-            <div className="dice-container">
-                {diceElements}
-            </div>
+            <div className="dice-container">{diceElements}</div>
+            <button className="roll-dice" onClick={rollDice}>
+                Roll
+            </button>
         </main>
     );
 }
